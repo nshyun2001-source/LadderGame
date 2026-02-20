@@ -696,6 +696,15 @@ button {
     margin-top: 12px;
 }
 
+.game-guide-text {
+    font-family: 'Gaegu', cursive;
+    font-size: 1.4rem;
+    color: var(--yellow);
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 0 #000;
+    animation: bounceComic 1s infinite alternate;
+}
+
 #ladder-view {
     position: relative;
     width: 100%;
@@ -721,6 +730,9 @@ button {
 
 /* ── Player photo thumbnail ── */
 .player-photo-label {
+    position: absolute;
+    top: 15px;
+    transform: translateX(-50%);
     width: 65px;
     height: 65px;
     border-radius: 50%;
