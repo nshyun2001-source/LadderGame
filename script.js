@@ -231,6 +231,7 @@ const state = {
     currentPlayerIndex: 0,
     ladderData: null,
     isRunning: false,
+    currentFacingMode: 'user', // user (내면), environment (외면)
 };
 
 // ── DOM 요소 ──
@@ -269,9 +270,22 @@ function showToast(msg, dur = 4000) {
 // =====================================================
 async function startCamera() {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+        if (video.srcObject) stopCamera();
+        const constraints = {
+            video: { facingMode: state.currentFacingMode },
+            audio: false
+        };
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
         video.srcObject = stream;
-    } catch {
+
+        // 내면 카메라(셀프)일 때만 좌우 반전
+        if (state.currentFacingMode === 'user') {
+            video.style.transform = 'scaleX(-1)';
+        } else {
+            video.style.transform = 'scaleX(1)';
+        }
+    } catch (err) {
+        console.error(err);
         showToast('카메라 권한이 필요합니다.');
     }
 }
@@ -393,6 +407,11 @@ document.getElementById('capture-btn').addEventListener('click', async () => {
 
 document.getElementById('retake-btn').addEventListener('click', refreshCaptureUI);
 
+document.getElementById('switch-camera-btn').addEventListener('click', () => {
+    state.currentFacingMode = (state.currentFacingMode === 'user') ? 'environment' : 'user';
+    startCamera();
+});
+
 document.getElementById('next-player-btn').addEventListener('click', () => {
     state.currentPlayerIndex++;
     if (state.currentPlayerIndex < state.playerCount) {
@@ -412,7 +431,7 @@ function buildResultsScreen() {
     state.players.forEach((p, i) => {
         const d = document.createElement('div');
         d.className = 'result-item';
-        d.innerHTML = `<label>🏁 굼뱅이 ${i + 1} 결과</label>
+        d.innerHTML = `<label>🏁 ${i + 1}번 라인</label>
             <input type="text" id="result-${i}" placeholder="예: 당첨, 꽝, 커피사기">`;
         c.appendChild(d);
     });

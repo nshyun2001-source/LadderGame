@@ -32,12 +32,19 @@ body {
 
 #app {
     width: 100%;
-    max-width: 460px;
-    /* 스마트폰 앱 비율 (9:19 가깝게) */
+    max-width: 480px;
     margin: 20px auto;
     padding: 0 15px;
     text-align: center;
     position: relative;
+    transition: max-width 0.4s ease;
+}
+
+/* 가로 모드 대응 */
+@media screen and (orientation: landscape) and (min-height: 400px) {
+    #app {
+        max-width: 900px;
+    }
 }
 
 /* ── Header ── */
@@ -141,6 +148,8 @@ button {
     font-family: 'Gaegu', cursive;
     transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: var(--shadow);
+    touch-action: manipulation;
+    /* 모바일 더블탭 줌 방지 */
 }
 
 .primary-btn {
@@ -616,8 +625,28 @@ button {
     display: block;
 }
 
-#video.hidden+.face-guide {
+#video.hidden+.face-guide,
+#video.hidden~#switch-camera-btn {
     display: none;
+}
+
+.camera-toggle-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: 2px solid #fff;
+    font-size: 1.5rem;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 0;
 }
 
 .controls {
