@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>굼뱅이 사다리타기</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div class="header-inner">
+                <h1>굼뱅이 사다리타기</h1>
+            </div>
+            <p>셀카를 찍어 운명의 사다리를 타보세요!</p>
+        </header>
+
+        <main id="game-container">
+            <!-- Setup Screen -->
+            <section id="setup-screen">
+                <!-- 상단: 화려한 배경 장식 레이어 -->
+                <div class="setup-decoration">
+                    <div class="deco-emoji e1">🎉</div>
+                    <div class="deco-emoji e2">✨</div>
+                    <div class="deco-emoji e3">🔥</div>
+                    <div class="deco-emoji e4">🐛</div>
+                    <div class="comic-burst">GO!</div>
+                </div>
+
+                <!-- 인원수 설정 카드: 글자에 딱 맞게 축소 -->
+                <div class="setup-card comic-panel">
+                    <label class="setup-label">굼뱅이 수</label>
+                    <div class="unified-stepper">
+                        <button type="button" id="minus-btn" class="step-btn-h">−</button>
+                        <input type="number" id="player-count" min="2" max="10" value="4" readonly>
+                        <button type="button" id="plus-btn" class="step-btn-h">+</button>
+                    </div>
+                </div>
+
+                <!-- 하단: 시작 버튼 (화려한 버튼 칸) -->
+                <div class="setup-action-area comic-panel">
+                    <button id="start-setup-btn" class="primary-btn full-width">설정 시작</button>
+                    <div class="action-deco">READY?</div>
+                </div>
+
+                <!-- 바닥: 기어가는 굼뱅이 장식 -->
+                <div class="crawling-grub-track">
+                    <div class="crawling-grub">
+                        <span class="grub-segment s1">🐛</span>
+                        <span class="grub-segment s2"></span>
+                        <span class="grub-segment s3"></span>
+                        <span class="grub-segment s4"></span>
+                        <span class="grub-segment s5"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Photo Capture Screen -->
+            <section id="capture-screen" class="glass-panel hidden">
+                <h2 id="capture-title">굼뱅이 1 사진 찍기</h2>
+                <div class="camera-wrapper">
+                    <video id="video" autoplay playsinline></video>
+                    <div class="face-guide"></div>
+                    <canvas id="canvas" class="hidden"></canvas>
+                    <div id="photo-preview" class="hidden"></div>
+                </div>
+                <div class="controls">
+                    <button id="capture-btn" class="action-btn">📸 사진 찍기</button>
+                    <button id="retake-btn" class="secondary-btn hidden">다시 찍기</button>
+                    <button id="next-player-btn" class="primary-btn hidden">다음 굼뱅이</button>
+                </div>
+            </section>
+
+            <!-- Results Input Screen -->
+            <section id="results-screen" class="glass-panel hidden">
+                <h2>결과 입력</h2>
+                <div id="results-inputs"></div>
+                <button id="start-game-btn" class="primary-btn">게임 시작!</button>
+            </section>
+
+            <!-- Ladder Game Screen -->
+            <section id="ladder-screen" class="hidden">
+                <div id="ladder-view">
+                    <canvas id="ladder-canvas"></canvas>
+                    <div id="characters-container"></div>
+                </div>
+                <div class="game-controls">
+                    <button id="reset-btn" class="secondary-btn">다시 하기</button>
+                </div>
+            </section>
+        </main>
+
+        <div id="toast" class="hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

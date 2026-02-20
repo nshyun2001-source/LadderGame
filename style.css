@@ -1,0 +1,794 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Gaegu:wght@400;700&display=swap');
+
+:root {
+    --bg: #1a1a2e;
+    --card: #252545;
+    --border: #000;
+    --green: #b2ff59;
+    --yellow: #ffeb3b;
+    --neon-pink: #ff4081;
+    --neon-blue: #00e5ff;
+    --shadow: 6px 6px 0px #000;
+    --shadow-hover: 10px 10px 0px #000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    background-attachment: fixed;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: hidden;
+}
+
+#app {
+    width: 96%;
+    max-width: 860px;
+    margin: 80px auto 20px;
+    /* 더 충분히 아래로 내림 */
+    text-align: center;
+}
+
+/* ── Header ── */
+header {
+    padding: 6px 0 4px;
+}
+
+.header-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2px;
+}
+
+.header-grub-icon {
+    font-size: 2.8rem;
+    animation: grubWiggle 1.4s ease-in-out infinite alternate;
+    display: inline-block;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.header-grub-icon:last-child {
+    animation-delay: 0.7s;
+    display: inline-block;
+}
+
+@keyframes grubWiggle {
+    0% {
+        transform: translateY(0) rotate(-12deg) scale(1);
+    }
+
+    100% {
+        transform: translateY(-5px) rotate(12deg) scale(1.15);
+    }
+}
+
+header h1 {
+    font-family: 'Outfit', sans-serif;
+    /* 코믹 서체에서 고딕체로 변경 */
+    font-size: 3.8rem;
+    /* 칸에 맞게 크기 확대 */
+    font-weight: 800;
+    margin: 0;
+    color: var(--yellow);
+    text-shadow: 5px 5px 0px #000;
+    animation: bounceComic 1.5s ease-in-out infinite alternate;
+    letter-spacing: -1px;
+}
+
+@keyframes bounceComic {
+    from {
+        transform: scale(1) rotate(-1deg);
+    }
+
+    to {
+        transform: scale(1.05) rotate(1deg);
+    }
+}
+
+header p {
+    font-size: 1.3rem;
+    color: #fff;
+    opacity: 1;
+    margin-top: 0.5rem;
+    background: var(--neon-pink);
+    color: #000;
+    font-weight: bold;
+    display: inline-block;
+    padding: 2px 12px;
+    border: 3px solid #000;
+    transform: rotate(-2deg);
+    border-radius: 8px;
+}
+
+/* ── Glass Panel ── */
+.glass-panel {
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 24px;
+    border: 4px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ── Buttons ── */
+button {
+    padding: 1rem 2rem;
+    border: 4px solid #000;
+    border-radius: 20px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Gaegu', cursive;
+    transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: var(--shadow);
+}
+
+.primary-btn {
+    background: var(--neon-blue);
+    color: #000;
+}
+
+.primary-btn:hover {
+    transform: scale(1.05) translate(-2px, -2px);
+    box-shadow: var(--shadow-hover);
+    background: var(--yellow);
+}
+
+.primary-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 4px solid #000;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: scale(1.05) translate(-2px, -2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.secondary-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+}
+
+.action-btn {
+    background: linear-gradient(135deg, #ffd740, #ff8f00);
+    color: #0a1628;
+}
+
+.action-btn:hover {
+    transform: scale(1.07) translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255, 215, 64, 0.45);
+}
+
+/* ── Setup ── */
+#setup-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    padding: 3rem 1rem;
+    background: url('bg_pattern.png');
+    background-size: 320px;
+    border-radius: 40px;
+    border: 8px solid #000;
+    box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+#setup-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.7));
+    z-index: 1;
+}
+
+.setup-decoration,
+.setup-card,
+.setup-action-area {
+    position: relative;
+    z-index: 2;
+}
+
+.setup-card {
+    width: fit-content !important;
+    /* 글자에 맞춰 축축소 */
+    padding: 1.5rem 2.2rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--card);
+    border: 5px solid #000;
+    border-radius: 30px;
+    box-shadow: 8px 8px 0px #000;
+    transform: rotate(-1.5deg);
+    transition: all 0.3s;
+}
+
+.setup-card:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.setup-label {
+    font-family: 'Gaegu', cursive;
+    font-size: 2.4rem;
+    color: var(--yellow);
+    margin-bottom: 1.2rem;
+    text-shadow: 3px 3px 0px #000;
+}
+
+/* ── Results Input ── */
+.result-input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    padding: 12px;
+    border: 4px solid #000;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+    transform: rotate(calc(-1deg + (2deg * var(--i, 0))));
+}
+
+.result-input-group label {
+    font-family: 'Gaegu', cursive;
+    font-size: 1.3rem;
+    color: var(--green);
+    min-width: 100px;
+}
+
+.result-input-group input {
+    flex: 1;
+    background: #fff;
+    border: 3px solid #000;
+    border-radius: 12px;
+    padding: 8px 15px;
+    font-size: 1.1rem;
+    color: #000;
+    font-family: 'Gaegu', cursive;
+}
+
+.unified-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: #000;
+    padding: 10px 20px;
+    border-radius: 40px;
+    border: 4px solid var(--green);
+}
+
+#player-count {
+    width: 90px;
+    height: 80px;
+    background: transparent;
+    border: none;
+    color: var(--yellow);
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+}
+
+.step-btn-h {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: var(--green);
+    color: #000;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 4px 4px 0px #000;
+}
+
+.step-btn-h:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.1);
+}
+
+.step-btn-h:active {
+    transform: scale(0.9) translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+}
+
+/* ── Fancy Decorations ── */
+.setup-decoration {
+    width: 100%;
+    height: 60px;
+    margin-bottom: -10px;
+}
+
+.deco-emoji {
+    position: absolute;
+    font-size: 2.5rem;
+    animation: floatAnim 3s ease-in-out infinite alternate;
+}
+
+.e1 {
+    top: -10px;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.e2 {
+    top: 0px;
+    right: 15%;
+    animation-delay: 0.5s;
+}
+
+.e3 {
+    bottom: -20px;
+    left: 25%;
+    animation-delay: 1s;
+}
+
+.e4 {
+    bottom: -10px;
+    right: 25%;
+    animation-delay: 1.5s;
+}
+
+@keyframes floatAnim {
+    from {
+        transform: translateY(0) rotate(-10deg);
+    }
+
+    to {
+        transform: translateY(-15px) rotate(10deg);
+    }
+}
+
+.comic-burst {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%) rotate(5deg);
+    background: var(--neon-pink);
+    color: #000;
+    font-family: 'Gaegu', cursive;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 5px 20px;
+    border: 4px solid #000;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    box-shadow: 5px 5px 0 #000;
+    animation: jello 2s infinite;
+}
+
+.setup-action-area {
+    width: 100%;
+    max-width: 360px;
+    padding: 2rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transform: rotate(1deg);
+}
+
+.action-deco {
+    font-family: 'Gaegu', cursive;
+    color: var(--neon-blue);
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+    animation: pulseComic 1s infinite alternate;
+}
+
+@keyframes pulseComic {
+    from {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    to {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.full-width {
+    width: 100%;
+    font-size: 1.5rem !important;
+    background: var(--neon-pink) !important;
+}
+
+/* Hide default spin buttons */
+#player-count::-webkit-inner-spin-button,
+#player-count::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ── Crawling Grub Decoration ── */
+.crawling-grub-track {
+    position: absolute;
+    bottom: 30px;
+    left: -100px;
+    width: calc(100% + 200px);
+    height: 80px;
+    z-index: 10;
+    /* 가장 앞으로 가져옴 */
+    pointer-events: none;
+}
+
+.crawling-grub {
+    position: absolute;
+    display: flex;
+    flex-direction: row-reverse;
+    /* 머리(s1)를 앞쪽에 배치 */
+    align-items: center;
+    animation: crawlAcross 12s linear infinite;
+}
+
+.grub-segment {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), #43a047);
+    border: 3px solid #000;
+    box-shadow: 2px 2px 0 #000;
+    animation: grubWobble 0.6s ease-in-out infinite alternate;
+    margin-right: -18px;
+    /* 마디가 겹치도록 설정 */
+}
+
+.grub-segment.s1 {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    font-size: 4rem;
+    position: relative;
+    z-index: 10;
+    margin-right: 0;
+}
+
+.s2 {
+    animation-delay: 0.1s;
+    transform: scale(0.9);
+    z-index: 9;
+}
+
+.s3 {
+    animation-delay: 0.2s;
+    transform: scale(0.8);
+    z-index: 8;
+}
+
+.s4 {
+    animation-delay: 0.3s;
+    transform: scale(0.7);
+    z-index: 7;
+}
+
+.s5 {
+    animation-delay: 0.4s;
+    transform: scale(0.6);
+    z-index: 6;
+}
+
+@keyframes crawlAcross {
+    0% {
+        left: 0%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes grubWobble {
+    from {
+        transform: scaleX(1) scaleY(1);
+    }
+
+    to {
+        transform: scaleX(1.2) scaleY(0.8);
+    }
+}
+
+/* ── Camera ── */
+.camera-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #000;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 5px solid var(--neon-blue);
+    box-shadow: 10px 10px 0px #000, 0 0 30px rgba(0, 229, 255, 0.4);
+}
+
+.camera-wrapper::after {
+    content: "LIVE SHOW!";
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: var(--neon-pink);
+    color: #000;
+    font-weight: bold;
+    padding: 2px 10px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    z-index: 10;
+}
+
+#video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+#photo-preview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.preview-photo {
+    width: 38%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 4px solid rgba(105, 240, 174, 0.6);
+    box-shadow: 0 0 30px rgba(105, 240, 174, 0.25);
+}
+
+.compositing-badge {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--yellow);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.face-guide {
+    position: absolute;
+    top: 50%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    border: 5px dashed var(--yellow);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 15;
+    box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.4);
+    display: block;
+}
+
+#video.hidden+.face-guide {
+    display: none;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ── Results Screen ── */
+#results-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.result-item label {
+    font-size: 0.82rem;
+    opacity: 0.7;
+}
+
+.result-item input {
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(105, 240, 174, 0.25);
+    background: rgba(105, 240, 174, 0.07);
+    color: #fff;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+}
+
+.result-item input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Ladder Screen ── */
+.game-controls {
+    text-align: center;
+    margin-top: 12px;
+}
+
+#ladder-view {
+    position: relative;
+    width: 100%;
+    height: 720px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+#ladder-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#characters-container {
+    position: absolute;
+    inset: 0;
+}
+
+/* ── Player photo thumbnail ── */
+.player-photo-label {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 4px solid var(--green);
+    background: #000;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #000;
+    transition: all 0.2s;
+    overflow: hidden;
+}
+
+.player-photo-label:hover {
+    transform: scale(1.15) rotate(5deg);
+    border-color: var(--yellow);
+    box-shadow: 6px 6px 0px #000;
+}
+
+.player-photo-label.grub-started {
+    border-color: #ff5252;
+    filter: grayscale(0.8) opacity(0.7);
+    box-shadow: 0 0 12px rgba(255, 82, 82, 0.3);
+    cursor: default;
+}
+
+.player-photo-label.grub-started:hover {
+    transform: translateX(-50%) scale(1);
+    /* No scale on hover once started */
+    rotate: 0deg;
+}
+
+/* ── Result label ── */
+.result-label {
+    position: absolute;
+    bottom: 8px;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 6px 14px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap;
+    transition: all 0.4s ease;
+}
+
+.result-label.result-highlight {
+    background: rgba(255, 215, 64, 0.9);
+    color: #1a1a0a;
+    border-color: #ffd740;
+    transform: translateX(-50%) scale(1.18);
+    box-shadow: 0 0 24px rgba(255, 215, 64, 0.7);
+    animation: resultPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes resultPop {
+    0% {
+        transform: translateX(-50%) scale(0.7);
+        opacity: 0.5;
+    }
+
+    60% {
+        transform: translateX(-50%) scale(1.28);
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1.18);
+        opacity: 1;
+    }
+}
+
+/* ── Toast ── */
+#toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 22, 40, 0.93);
+    backdrop-filter: blur(12px);
+    color: var(--green);
+    padding: 14px 32px;
+    border-radius: 30px;
+    z-index: 2000;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 1px solid rgba(105, 240, 174, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    animation: toastIn 0.3s ease both;
+}
+
+@keyframes toastIn {
+    from {
+        transform: translateX(-50%) translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
